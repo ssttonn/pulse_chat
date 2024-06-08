@@ -9,7 +9,7 @@ import (
 
 type GroupUseCase interface {
 	AddNewMember(ctx context.Context, groupID string, userID string, role domain.GroupMemberRole) error
-	CreateNewGroup(ctx context.Context, creatorID string, name string, groupType domain.GroupType) error
+	CreateNewGroup(ctx context.Context, creatorID string, name string, groupType domain.GroupType) (*domain.Group, error)
 }
 
 type groupUseCase struct {
@@ -36,10 +36,10 @@ func (g *groupUseCase) AddNewMember(ctx context.Context, groupID string, userID 
 }
 
 // CreateNewGroup implements [GroupUseCase].
-func (g *groupUseCase) CreateNewGroup(ctx context.Context, creatorID string, name string, groupType domain.GroupType) error {
+func (g *groupUseCase) CreateNewGroup(ctx context.Context, creatorID string, name string, groupType domain.GroupType) (*domain.Group, error) {
 	user, err := g.userRepo.GetByID(ctx, creatorID)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	newGroup := domain.Group{
@@ -50,10 +50,14 @@ func (g *groupUseCase) CreateNewGroup(ctx context.Context, creatorID string, nam
 	err = g.groupRepo.Create(ctx, &newGroup)
 
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	err = g.groupRepo.AddMember(ctx, newGroup.ID, user.ID, domain.GroupRoleAdmin)
 
-	return err
+	if err != nil {
+		return nil, err
+	}
+
+	return &newGroup, nil
 }

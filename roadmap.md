@@ -245,3 +245,8 @@
 | 2024-05-18 | 4     | 4.5       | ✅ Done | Implemented User business logic (UseCase)            |
 | 2024-05-25 | 4     | 4.4       | ✅ Done | Implemented Postgres Repository for Groups           |
 | 2024-05-25 | 4     | 4.5       | ✅ Done | Implemented Group UseCase with Clean Architecture    |
+| 2024-05-30 | 5     | 5.1       | ✅ Done | Setup HTTP Router with chi and basic middlewares     |
+| 2024-05-30 | 5     | 5.1       | ✅ Done | Wired up HTTP Router to main server                  |
+| 2024-06-02 | 5     | 5.2       | ✅ Done | Implemented JWT generation and parsing utility       |
+| 2024-06-08 | 5     | 5.3       | ✅ Done | Implemented Auth Middleware                          |
+| 2024-06-08 | 5     | 5.3       | ✅ Done | Implemented User & Group Handlers                    |

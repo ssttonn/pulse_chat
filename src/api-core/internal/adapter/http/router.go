@@ -8,7 +8,7 @@ import (
 )
 
 // NewRouter khởi tạo và cấu hình các endpoints cho API
-func NewRouter() *chi.Mux {
+func NewRouter(userHandler *UserHandler) *chi.Mux {
 	r := chi.NewRouter()
 
 	// Cài đặt các Middleware cơ bản
@@ -21,6 +21,8 @@ func NewRouter() *chi.Mux {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("OK"))
 	})
+
+	r.Post("/v1/users/register", userHandler.Register)
 
 	return r
 }
