@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
-	"net"
 	"net/http"
 	"time"
 	"pulse/src/edge-ws/internal/connection"
+	"pulse/src/edge-ws/internal/router"
 	"pulse/src/pkg/config"
+	"pulse/src/pkg/kafka"
 )
 
 func main() {
@@ -17,18 +18,17 @@ func main() {
 		log.Fatalf("Cannot initialize config: %v", err)
 	}
 
+	producer, err := kafka.NewProducer([]string{cfg.KafkaBrokers})
+	if err != nil {
+		log.Fatalf("Cannot initialize kafka producer: %v", err)
+	}
+	defer producer.Close()
+
+	msgRouter := router.NewRouter(producer, cfg.JwtSecret)
+
 	el, _ := connection.NewEventLoop()
 
-	go el.Start(func(conn net.Conn) {
-		userID, err := connection.HandleAuthFrame(conn, cfg.JwtSecret)
-		if err != nil {
-			log.Printf("Auth failed for %s, closing connection: %v", conn.RemoteAddr(), err)
-			conn.Close()
-			return
-		}
-
-		log.Printf("User %s authenticated successfully on %s!", userID, conn.RemoteAddr())
-	})
+	go el.Start(msgRouter.HandleConnection)
 
 	mux := http.NewServeMux()
 
@@ -62,6 +62,6 @@ func main() {
 	}
 
 	if err := server.ListenAndServe(); err != nil {
-		log.Fatalf("Edge-WS Server crashed: %v", err)
+		log.Printf("Edge-WS Server crashed: %v", err)
 	}
 }

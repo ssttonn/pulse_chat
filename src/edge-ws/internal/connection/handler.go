@@ -12,36 +12,50 @@ import (
 	"github.com/gobwas/ws"
 )
 
-func HandleAuthFrame(conn net.Conn, secret string) (string, error) {
+// ReadFrame reads a WS frame, unmasks it, and returns the raw payload.
+// It returns a 'release' function that the caller MUST defer to prevent memory leaks!
+func ReadFrame(conn net.Conn) ([]byte, func(), error) {
 	header, err := ws.ReadHeader(conn)
 	if err != nil {
-		return "nil", fmt.Errorf("failed to read ws header: %v", err)
+		return nil, nil, fmt.Errorf("read header: %v", err)
 	}
 
-	if header.Length > 4096 {
-		return "", fmt.Errorf("auth payload too large: %d", header.Length)
+	// Cap payload size at 8KB to prevent OOM
+	if header.Length > 8192 {
+		return nil, nil, fmt.Errorf("payload too large: %d", header.Length)
 	}
 
 	bufPtr := pool.GetBuffer()
-
 	if bufPtr == nil {
-		return "", fmt.Errorf("failed to get buffer from pool")
+		return nil, nil, fmt.Errorf("failed to get buffer")
 	}
 
-	defer pool.PutBuffer(bufPtr)
+	release := func() {
+		pool.PutBuffer(bufPtr)
+	}
 
 	payload := (*bufPtr)[:header.Length]
 
 	if _, err := io.ReadFull(conn, payload); err != nil {
-		return "", fmt.Errorf("failed to read payload: %v", err)
+		release()
+		return nil, nil, fmt.Errorf("read payload: %v", err)
 	}
 
 	if header.Masked {
 		ws.Cipher(payload, header.Mask, 0)
 	}
 
-	var inbound models.InboundMessage
+	return payload, release, nil
+}
 
+func HandleAuthFrame(conn net.Conn, secret string) (string, error) {
+	payload, release, err := ReadFrame(conn)
+	if err != nil {
+		return "", err
+	}
+	defer release()
+
+	var inbound models.InboundMessage
 	if err := json.Unmarshal(payload, &inbound); err != nil {
 		return "", fmt.Errorf("invalid json format: %v", err)
 	}
@@ -51,7 +65,6 @@ func HandleAuthFrame(conn net.Conn, secret string) (string, error) {
 	}
 
 	var authPayload models.AuthPayload
-
 	if err := json.Unmarshal(inbound.Payload, &authPayload); err != nil {
 		return "", fmt.Errorf("invalid auth payload: %v", err)
 	}
