@@ -227,26 +227,32 @@
 
 ## Session Log
 
-| Date       | Phase | Step      | Status  | Note                                                 |
-| ---------- | ----- | --------- | ------- | ---------------------------------------------------- |
-| 2024-04-10 | 1     | 1.1       | ✅ Done | Initialized module as `pulse`                        |
-| 2024-04-10 | 1     | 1.2       | ✅ Done | Added `Makefile`                                     |
-| 2024-04-10 | 1     | 1.3 - 1.5 | ✅ Done | CI/CD, Linters, Directories                          |
-| 2024-04-17 | 2     | 2.1 - 2.2 | ✅ Done | Added Multi-stage Dockerfiles & Ignore               |
-| 2024-04-17 | 2     | 2.3 - 2.5 | ✅ Done | Setup Local Infra (Kafka, Postgres, NATS, DynamoDB)  |
-| 2024-04-24 | 3     | 3.1       | ✅ Done | Added Config loader with Viper                       |
-| 2024-04-24 | 3     | 3.2       | ✅ Done | Defined API Core Entities                            |
-| 2024-04-24 | 3     | 3.3       | ✅ Done | Defined WS JSON payloads with json.RawMessage        |
-| 2024-04-24 | 3     | 3.4       | ✅ Done | Defined Kafka/NATS RoutedMessage event               |
-| 2024-05-02 | 4     | 4.1       | ✅ Done | Created Postgres migration scripts with UUID         |
-| 2024-05-10 | 4     | 4.2       | ✅ Done | Implemented Postgres connection pool with pgx        |
-| 2024-05-17 | 4     | 4.3       | ✅ Done | Defined Repository interfaces for Clean Architecture |
-| 2024-05-18 | 4     | 4.4       | ✅ Done | Implemented Postgres Repository for Users            |
-| 2024-05-18 | 4     | 4.5       | ✅ Done | Implemented User business logic (UseCase)            |
-| 2024-05-25 | 4     | 4.4       | ✅ Done | Implemented Postgres Repository for Groups           |
-| 2024-05-25 | 4     | 4.5       | ✅ Done | Implemented Group UseCase with Clean Architecture    |
-| 2024-05-30 | 5     | 5.1       | ✅ Done | Setup HTTP Router with chi and basic middlewares     |
-| 2024-05-30 | 5     | 5.1       | ✅ Done | Wired up HTTP Router to main server                  |
-| 2024-06-02 | 5     | 5.2       | ✅ Done | Implemented JWT generation and parsing utility       |
-| 2024-06-08 | 5     | 5.3       | ✅ Done | Implemented Auth Middleware                          |
-| 2024-06-08 | 5     | 5.3       | ✅ Done | Implemented User & Group Handlers                    |
+| Date       | Phase | Step      | Status  | Note                                                   |
+| ---------- | ----- | --------- | ------- | ------------------------------------------------------ |
+| 2024-04-10 | 1     | 1.1       | ✅ Done | Initialized module as `pulse`                          |
+| 2024-04-10 | 1     | 1.2       | ✅ Done | Added `Makefile`                                       |
+| 2024-04-10 | 1     | 1.3 - 1.5 | ✅ Done | CI/CD, Linters, Directories                            |
+| 2024-04-17 | 2     | 2.1 - 2.2 | ✅ Done | Added Multi-stage Dockerfiles & Ignore                 |
+| 2024-04-17 | 2     | 2.3 - 2.5 | ✅ Done | Setup Local Infra (Kafka, Postgres, NATS, DynamoDB)    |
+| 2024-04-24 | 3     | 3.1       | ✅ Done | Added Config loader with Viper                         |
+| 2024-04-24 | 3     | 3.2       | ✅ Done | Defined API Core Entities                              |
+| 2024-04-24 | 3     | 3.3       | ✅ Done | Defined WS JSON payloads with json.RawMessage          |
+| 2024-04-24 | 3     | 3.4       | ✅ Done | Defined Kafka/NATS RoutedMessage event                 |
+| 2024-05-02 | 4     | 4.1       | ✅ Done | Created Postgres migration scripts with UUID           |
+| 2024-05-10 | 4     | 4.2       | ✅ Done | Implemented Postgres connection pool with pgx          |
+| 2024-05-17 | 4     | 4.3       | ✅ Done | Defined Repository interfaces for Clean Architecture   |
+| 2024-05-18 | 4     | 4.4       | ✅ Done | Implemented Postgres Repository for Users              |
+| 2024-05-18 | 4     | 4.5       | ✅ Done | Implemented User business logic (UseCase)              |
+| 2024-05-25 | 4     | 4.4       | ✅ Done | Implemented Postgres Repository for Groups             |
+| 2024-05-25 | 4     | 4.5       | ✅ Done | Implemented Group UseCase with Clean Architecture      |
+| 2024-05-30 | 5     | 5.1       | ✅ Done | Setup HTTP Router with chi and basic middlewares       |
+| 2024-05-30 | 5     | 5.1       | ✅ Done | Wired up HTTP Router to main server                    |
+| 2024-06-02 | 5     | 5.2       | ✅ Done | Implemented JWT generation and parsing utility         |
+| 2024-06-08 | 5     | 5.3       | ✅ Done | Implemented Auth Middleware                            |
+| 2024-06-08 | 5     | 5.3       | ✅ Done | Implemented User & Group Handlers                      |
+| 2024-06-12 | 6     | 6.1       | ✅ Done | Setup basic HTTP server for WS upgrade endpoint        |
+| 2024-06-12 | 6     | 6.2       | ✅ Done | Implemented gobwas/ws zero-allocation upgrade          |
+| 2024-06-15 | 6     | 6.3       | ✅ Done | Implemented Kqueue Event Loop for macOS                |
+| 2024-06-16 | 6     | 6.4       | ✅ Done | Implemented sync.Pool for zero-allocation buffer reuse |
+| 2024-06-20 | 6     | 6.5       | ✅ Done | Parsed JWT auth on first WS frame via gobwas/ws        |
+| 2024-06-25 | 7     | 7.1       | ✅ Done | Implemented Sarama AsyncProducer wrapper               |

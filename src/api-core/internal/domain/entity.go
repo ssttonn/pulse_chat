@@ -40,5 +40,5 @@ type GroupMember struct {
 	JoinedAt time.Time       `json:"joined_at"`
 }
 
-var ErrUserNotFound error = errors.New("User not found!!!")
-var ErrGroupNotFound error = errors.New("Group not found!!!")
+var ErrUserNotFound error = errors.New("user not found")
+var ErrGroupNotFound error = errors.New("group not found")

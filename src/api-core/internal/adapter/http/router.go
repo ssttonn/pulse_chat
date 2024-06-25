@@ -19,7 +19,7 @@ func NewRouter(userHandler *UserHandler) *chi.Mux {
 	// Định nghĩa API Healthcheck
 	r.Get("/health", func(w http.ResponseWriter, req *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("OK"))
+		_, _ = w.Write([]byte("OK"))
 	})
 
 	r.Post("/v1/users/register", userHandler.Register)

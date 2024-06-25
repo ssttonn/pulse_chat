@@ -23,6 +23,7 @@ type Config struct {
 	RedisURL     string `mapstructure:"REDIS_URL"`
 	NatsURL      string `mapstructure:"NATS_URL"`
 	DynamoDBURL  string `mapstructure:"DYNAMODB_URL"`
+	JwtSecret    string `mapstructure:"JWT_SECRET"`
 }
 
 // LoadConfig đọc cấu hình từ file .env hoặc từ OS Environment Variables
@@ -42,6 +43,7 @@ func LoadConfig() (*Config, error) {
 	viper.SetDefault("REDIS_URL", "localhost:6379")
 	viper.SetDefault("NATS_URL", "nats://localhost:4222")
 	viper.SetDefault("DYNAMODB_URL", "http://localhost:8000")
+	viper.SetDefault("JWT_SECRET", "sample_secret")
 
 	// Đọc file .env
 	if err := viper.ReadInConfig(); err != nil {

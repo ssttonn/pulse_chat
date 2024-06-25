@@ -12,6 +12,13 @@ type UserHandler struct {
 	usecase usecase.UserUseCase
 }
 
+// NewUserHandler creates a new handler injecting the usecase
+func NewUserHandler(u usecase.UserUseCase) *UserHandler {
+	return &UserHandler{
+		usecase: u,
+	}
+}
+
 type registerRequest struct {
 	Username  string `json:"username"`
 	AvatarURL string `json:"avatarUrl"`
@@ -49,5 +56,5 @@ func (h *UserHandler) Register(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(resp)
+	_ = json.NewEncoder(w).Encode(resp)
 }
