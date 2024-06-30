@@ -256,3 +256,5 @@
 | 2024-06-16 | 6     | 6.4       | ✅ Done | Implemented sync.Pool for zero-allocation buffer reuse |
 | 2024-06-20 | 6     | 6.5       | ✅ Done | Parsed JWT auth on first WS frame via gobwas/ws        |
 | 2024-06-25 | 7     | 7.1       | ✅ Done | Implemented Sarama AsyncProducer wrapper               |
+| 2024-06-25 | 7     | 7.2       | ✅ Done | Routed WebSocket chat frames to Kafka                  |
+| 2024-06-30 | 8     | 8.1       | ✅ Done | Implemented DynamoDB AWS SDK v2 client                 |
