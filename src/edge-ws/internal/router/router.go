@@ -7,8 +7,8 @@ import (
 	"sync"
 
 	"pulse/src/edge-ws/internal/connection"
-	"pulse/src/edge-ws/internal/models"
 	"pulse/src/pkg/kafka"
+	"pulse/src/pkg/models"
 )
 
 type Router struct {

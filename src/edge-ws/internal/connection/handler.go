@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"io"
 	"net"
-	"pulse/src/edge-ws/internal/models"
 	"pulse/src/edge-ws/internal/pool"
 	"pulse/src/pkg/auth"
+	"pulse/src/pkg/models"
 
 	"github.com/gobwas/ws"
 )

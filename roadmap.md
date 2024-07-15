@@ -114,11 +114,12 @@
 | --- | ----------------- | ------------------------------------ | ------------------------------------------------- | ----------------------------------- | ---------- |
 | 8.1 | Router            | `src/pkg/dynamo`                     | AWS SDK v2 DynamoDB client                        | `go test ./pkg/dynamo`              | 2.4        |
 | 8.2 | Router            | `scripts/dynamodb_schema.sh`         | Create DynamoDB local tables                      | `./scripts/dynamodb_schema.sh`      | 8.1        |
-| 8.3 | Router            | `src/message-router/internal/worker` | Create buffered channel for incoming messages     | Unit test channel buffer limits     | 8.1        |
-| 8.4 | Router            | `src/message-router/internal/worker` | Implement `time.Ticker` (100ms) for flush trigger | Unit test flush timing              | 8.3        |
-| 8.5 | Router            | `src/message-router/internal/db`     | Implement DynamoDB `BatchWriteItem`               | `go test -tags=integration ./...`   | 8.4        |
-| 8.6 | Router            | `src/pkg/kafka`                      | Kafka Consumer Group wrapper                      | `go test ./pkg/kafka`               | 7.1        |
-| 8.7 | Router            | `src/message-router/internal/worker` | Consume `chat.inbound` -> send to batch channel   | Run edge + router, send 100 WS msgs | 8.5        |
+| 8.3 | Shared            | `src/pkg/models`                     | Extract shared payload models                     | `go build ./...`                    | 8.2        |
+| 8.4 | Router            | `src/message-router/internal/worker` | Create buffered channel for incoming messages     | Unit test channel buffer limits     | 8.3        |
+| 8.5 | Router            | `src/message-router/internal/worker` | Implement `time.Ticker` (100ms) for flush trigger | Unit test flush timing              | 8.4        |
+| 8.6 | Router            | `src/message-router/internal/db`     | Implement DynamoDB `BatchWriteItem`               | `go test -tags=integration ./...`   | 8.5        |
+| 8.7 | Router            | `src/pkg/kafka`                      | Kafka Consumer Group wrapper                      | `go test ./pkg/kafka`               | 7.1        |
+| 8.8 | Router            | `src/message-router/internal/worker` | Consume `chat.inbound` -> send to batch channel   | Run edge + router, send 100 WS msgs | 8.6        |
 
 ## Phase 9: Presence Tracking & NATS Fanout
 
@@ -258,3 +259,8 @@
 | 2024-06-25 | 7     | 7.1       | ✅ Done | Implemented Sarama AsyncProducer wrapper               |
 | 2024-06-25 | 7     | 7.2       | ✅ Done | Routed WebSocket chat frames to Kafka                  |
 | 2024-06-30 | 8     | 8.1       | ✅ Done | Implemented DynamoDB AWS SDK v2 client                 |
+| 2024-07-02 | 8     | 8.2       | ✅ Done | Created DynamoDB local table with bash script          |
+| 2024-07-05 | 8     | 8.3       | ✅ Done | Extracted shared payload models                        |
+| 2024-07-06 | 8     | 8.4       | ✅ Done | Created buffered channel for micro-batches             |
+| 2024-07-10 | 8     | 8.5       | ✅ Done | Implemented time.Ticker for flush trigger        |
+| 2024-07-15 | 8     | 8.6       | ✅ Done | Implemented DynamoDB BatchWriteItem              |
