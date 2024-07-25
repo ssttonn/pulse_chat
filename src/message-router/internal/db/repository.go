@@ -13,6 +13,12 @@ type Repository struct {
 	db *dynamodb.Client
 }
 
+func NewRepository(db *dynamodb.Client) *Repository {
+	return &Repository{
+		db: db,
+	}
+}
+
 func (r *Repository) BatchInsertMessages(ctx context.Context, messages []models.ChatPayload) error {
 	if len(messages) == 0 {
 		return nil

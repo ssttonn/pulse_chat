@@ -3,6 +3,7 @@ package worker
 import (
 	"context"
 	"log"
+	"pulse/src/message-router/internal/db"
 	"pulse/src/pkg/models"
 	"time"
 )
@@ -10,12 +11,14 @@ import (
 type Batcher struct {
 	messageChan chan models.ChatPayload
 	batchSize   int
+	repo        *db.Repository
 }
 
-func NewBatcher(maxBufferSize int, batchSize int) *Batcher {
+func NewBatcher(maxBufferSize int, batchSize int, repo *db.Repository) *Batcher {
 	return &Batcher{
 		messageChan: make(chan models.ChatPayload, maxBufferSize),
 		batchSize:   batchSize,
+		repo:        repo,
 	}
 }
 

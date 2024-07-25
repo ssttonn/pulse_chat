@@ -264,3 +264,5 @@
 | 2024-07-06 | 8     | 8.4       | ✅ Done | Created buffered channel for micro-batches             |
 | 2024-07-10 | 8     | 8.5       | ✅ Done | Implemented time.Ticker for flush trigger        |
 | 2024-07-15 | 8     | 8.6       | ✅ Done | Implemented DynamoDB BatchWriteItem              |
+| 2024-07-20 | 8     | 8.7       | ✅ Done | Implemented Kafka Consumer Group wrapper         |
+| 2024-07-25 | 8     | 8.8       | ✅ Done | Wired up message-router main executable          |
